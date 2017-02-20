@@ -1,6 +1,7 @@
 var GraphQL = require("graphql");
 const fetch = require('node-fetch');
 const querystring = require('querystring');
+const globalConfig = require('../config/global');
 
 const GraphQLSchema = GraphQL.GraphQLSchema;
 const GraphQLObjectType = GraphQL.GraphQLObjectType;
@@ -13,7 +14,7 @@ const GraphQLList = GraphQL.GraphQLList;
 var fetchRestaurants = function(args) {
     var params = querystring.stringify({
         query: "restaurants+in+Dubai+" + (!args.filterText ? "" : args.filterText),
-        key: "AIzaSyDx0ZSrJP3yyjos6NmNmQYX28SGRLDAkVo"
+        key: globalConfig.googleapis.key
     });
 
     return fetch("https://maps.googleapis.com/maps/api/place/textsearch/json?" + params)
